@@ -1,0 +1,227 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      /* The Modal (background) */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        -webkit-animation-name: fadeIn; /* Fade in the background */
+        -webkit-animation-duration: 0.4s;
+        animation-name: fadeIn;
+        animation-duration: 0.4s;
+      }
+
+      /* Modal Content */
+      .modal-content {
+        position: fixed;
+        bottom: 0;
+        background-color: #fefefe;
+        width: 100%;
+        -webkit-animation-name: slideIn;
+        -webkit-animation-duration: 0.4s;
+        animation-name: slideIn;
+        animation-duration: 0.4s;
+      }
+
+      /* The Close Button */
+      .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .modal-header {
+        padding: 2px 16px;
+        background-color: #5cb85c;
+        color: white;
+      }
+
+      .modal-body {
+        padding: 2px 16px;
+      }
+
+      .modal-footer {
+        padding: 2px 2px;
+        background-color: #5cb85c;
+        color: white;
+      }
+
+      /* Add Animation */
+      @-webkit-keyframes slideIn {
+        from {
+          bottom: -300px;
+          opacity: 0;
+        }
+        to {
+          bottom: 0;
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          bottom: -300px;
+          opacity: 0;
+        }
+        to {
+          bottom: 0;
+          opacity: 1;
+        }
+      }
+
+      @-webkit-keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .renderModal > a,
+      p > a {
+        text-decoration: none;
+      }
+    </style> -->
+    <!-- Remember to include jQuery :) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"
+    />
+  </head>
+  <body>
+    <h2>IB Business</h2>
+
+    <!-- Trigger/Open The Modal -->
+    <p>
+      IB Business is a course designed by a conglomerate of successful Business
+      entities, for international students. The idea is that this course will
+      prepare students to enter business wth a base lb=vel of understanding of
+      techniques and entities in commerce.
+    </p>
+    <p>
+      For example, a
+      <span
+        id="term_brick_and_mortar"
+        class="renderModal"
+        onclick="playIt('term_brick_and_mortar')"
+        ><a href="#">Brick and Mortar store </a></span
+      >, versus an
+      <span
+        id="term_e_commerce"
+        class="renderModal"
+        onclick="playIt('term_e_commerce')"
+        ><a href="#">e-commerce</a> entity.</span
+      >
+    </p>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2 id="term_area">Modal Header</h2>
+        </div>
+        <div class="modal-body">
+          <p id="definition_area">Some text in the Modal Body</p>
+          <p>Some other text...</p>
+        </div>
+        <div class="modal-footer">
+          <h3>CIT 215 Terms</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal HTML embedded directly into document -->
+    <div id="ex1" class="modal">
+      <p>Thanks for clicking. That felt good.</p>
+      <a href="#" rel="modal:close">Close</a>
+    </div>
+
+    <!-- Link to open the modal -->
+    <p><a href="#ex1" rel="modal:open">Open Modal</a></p>
+    <script>
+      let termsDictionary = {
+        term_brick_and_mortar: {
+          term: "Brick and Mortar Store",
+          def: "This describes a physical store, that customrs can walk into and experience the merchandise themselves.",
+        },
+        term_e_commerce: {
+          term: "E-Commerce",
+          def: "E-commerce describes a business entity that operates exclusively through online media, and on the internet.",
+        },
+      };
+      // Get the modal
+      let modal = document.querySelector("#myModal");
+
+      // Get the button that opens the modal
+      //let btn = document.querySelector("#myBtn");
+
+      // Get the <span> element that closes the modal
+      let span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks the button, open the modal
+      // btn.onclick = function () {
+      //   modal.style.display = "block";
+      // };
+
+      const playIt = (e) => {
+        console.log(e);
+        alert(termsDictionary[e].def);
+        modal.style.display = "block";
+        let defArea = document.querySelector("#definition_area");
+        let termArea = document.querySelector("#term_area");
+        defArea.textContent = termsDictionary[e].def;
+        termArea.textContent = termsDictionary[e].term;
+      };
+      // When the user clicks on <spans> (x), close the modal
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
